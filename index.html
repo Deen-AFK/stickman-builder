@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#100b20" />
+    <title>Stickman Builder</title>
+  </head>
+  <body>
+    <main class="game-shell">
+      <header class="topbar">
+        <a class="wordmark" href="#" aria-label="Stickman Builder home">
+          <span class="wordmark-mark" aria-hidden="true">+</span>
+          <span>STICKMAN<br />BUILDER</span>
+        </a>
+        <div class="level-label"><span class="level-dot"></span> <span id="level-label">LEVEL 1 / 5</span> <span class="level-name" id="level-name">THE FIRST GAP</span></div>
+        <div class="top-actions">
+          <button class="icon-button" data-action="pause" title="Pause" aria-label="Pause game">Ⅱ</button>
+          <button class="icon-button" data-action="restart" title="Restart" aria-label="Restart level">↻</button>
+        </div>
+      </header>
+
+      <section class="game-layout" aria-label="Platform game">
+        <aside class="tool-rail">
+          <div class="rail-label">BUILD</div>
+          <button class="piece-button selected" data-action="select-piece" data-piece="wall" aria-pressed="true" title="Select wall">
+            <span class="piece-icon wall-icon" aria-hidden="true"></span><span class="piece-label">WALL × <b data-inventory-count="wall">3</b></span><kbd>1</kbd>
+          </button>
+          <button class="piece-button" data-action="select-piece" data-piece="ramp" aria-pressed="false" title="Select ramp">
+            <span class="piece-icon ramp-icon" aria-hidden="true"></span><span class="piece-label">RAMP × <b data-inventory-count="ramp">3</b></span><kbd>2</kbd>
+          </button>
+          <button class="piece-button" data-action="select-piece" data-piece="platform" aria-pressed="false" title="Select platform">
+            <span class="piece-icon platform-icon" aria-hidden="true"></span><span class="piece-label">PLATFORM × <b data-inventory-count="platform">4</b></span><kbd>3</kbd>
+          </button>
+          <button class="piece-button" data-action="select-piece" data-piece="ladder" aria-pressed="false" title="Select ladder">
+            <span class="piece-icon ladder-icon" aria-hidden="true"></span><span class="piece-label">LADDER × <b data-inventory-count="ladder">2</b></span><kbd>4</kbd>
+          </button>
+          <div class="rail-hint">GRID 32<br />CLICK TO PLACE<br />CLICK PIECE TO REMOVE</div>
+        </aside>
+
+        <div class="play-area">
+          <div id="game" aria-label="Stickman Builder game canvas"></div>
+          <div class="canvas-topline"><span><i></i> BUILD MODE</span><span>GRID 32</span></div>
+          <div id="boss-hud" class="boss-hud" hidden>
+            <div class="boss-heading">
+              <span>LEVEL 5 — DRAGON</span>
+              <strong>DRAGON</strong>
+              <div id="boss-hearts" class="dragon-hearts" role="img" aria-label="5 of 5 HP" aria-live="polite">
+                <svg class="dragon-heart is-active" data-heart="0" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.2 3.7 12.9C-.3 8.6 2.7 2.5 7.1 2.5 9.3 2.5 11 3.8 12 5.4c1-1.6 2.7-2.9 4.9-2.9 4.4 0 7.4 6.1 3.4 10.4Z" /></svg>
+                <svg class="dragon-heart is-active" data-heart="1" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.2 3.7 12.9C-.3 8.6 2.7 2.5 7.1 2.5 9.3 2.5 11 3.8 12 5.4c1-1.6 2.7-2.9 4.9-2.9 4.4 0 7.4 6.1 3.4 10.4Z" /></svg>
+                <svg class="dragon-heart is-active" data-heart="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.2 3.7 12.9C-.3 8.6 2.7 2.5 7.1 2.5 9.3 2.5 11 3.8 12 5.4c1-1.6 2.7-2.9 4.9-2.9 4.4 0 7.4 6.1 3.4 10.4Z" /></svg>
+                <svg class="dragon-heart is-active" data-heart="3" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.2 3.7 12.9C-.3 8.6 2.7 2.5 7.1 2.5 9.3 2.5 11 3.8 12 5.4c1-1.6 2.7-2.9 4.9-2.9 4.4 0 7.4 6.1 3.4 10.4Z" /></svg>
+                <svg class="dragon-heart is-active" data-heart="4" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.2 3.7 12.9C-.3 8.6 2.7 2.5 7.1 2.5 9.3 2.5 11 3.8 12 5.4c1-1.6 2.7-2.9 4.9-2.9 4.4 0 7.4 6.1 3.4 10.4Z" /></svg>
+              </div>
+            </div>
+            <div id="boss-cue" class="boss-cue">BUILD A WALL TO BLOCK THE FIREBALL!</div>
+          </div>
+          <div class="canvas-bottomline">
+            <span><b>MOVE</b> A D / ← →</span><span><b>JUMP</b> SPACE</span><button class="play-button" data-action="play">▶ <span>PLAY</span></button>
+          </div>
+          <div id="screen-overlay" class="screen-overlay">
+            <section class="screen-panel" aria-live="polite">
+              <p class="screen-eyebrow" id="screen-eyebrow">NEON BUILDER // CAMPAIGN</p>
+              <h1 id="screen-title">Choose a level</h1>
+              <p id="screen-message">Clear each course to unlock the next.</p>
+              <div id="level-grid" class="level-grid">
+                <button class="level-option" data-level="0"><b>01</b><span>FIRST GAP</span><small>UNLOCKED</small></button>
+                <button class="level-option" data-level="1" disabled><b>02</b><span>LONG WAY DOWN</span><small>LOCKED</small></button>
+                <button class="level-option" data-level="2" disabled><b>03</b><span>HIGH VOLTAGE</span><small>LOCKED</small></button>
+                <button class="level-option" data-level="3" disabled><b>04</b><span>HOT PURSUIT</span><small>LOCKED</small></button>
+                <button class="level-option" data-level="4" disabled><b>05</b><span>NEON GAUNTLET</span><small>LOCKED</small></button>
+              </div>
+              <div id="screen-actions" class="screen-actions" hidden>
+                <button id="screen-primary" class="screen-primary" type="button">NEXT LEVEL</button>
+                <button id="screen-secondary" class="screen-secondary" type="button">LEVEL SELECT</button>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+      <footer class="footer-note"><span>FIVE COURSES. FOUR BUILD TYPES.</span><span>ORIGINAL SHAPES <b>•</b> NO EXTERNAL ART</span></footer>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
